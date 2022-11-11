@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Sleep Tracker
@@ -15,6 +15,29 @@
 
   <div id="container">
     <strong>Ready to create an app?</strong>
+    <p>No sleep tracked?</p>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
+
 </ion-content>
+<app-nav-bar></app-nav-bar> -->
+
+<ion-tabs class="nav">
+  <ion-tab-bar slot="bottom">
+    
+    <ion-tab-button tab="log-sleep">
+      <ion-icon name="bed-outline"></ion-icon>
+      <ion-label>Log Sleep</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="calendar">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label>Calendar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="log-sleepiness">
+      <ion-icon name="analytics-outline"></ion-icon>
+      <ion-label>Log Sleepiness</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

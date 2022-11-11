@@ -6,6 +6,45 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+    children: [
+      {
+        path: 'log-sleep',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../log-sleep/log-sleep.module').then( m => m.LogSleepPageModule)
+          }
+        ] 
+      },
+      {
+        path: 'calendar',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../calendar/calendar.module').then( m => m.CalendarPageModule)
+          }
+        ] 
+      },
+      {
+        path: 'log-sleepiness',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../log-sleepiness/log-sleepiness.module').then( m => m.LogSleepinessPageModule)
+          }
+        ] 
+      },
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
   }
 ];
 
@@ -13,4 +52,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomePageRoutingModule {}
+
+export class HomePageRoutingModule { }
