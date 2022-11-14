@@ -1,9 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>log-sleep</ion-title>
+    <ion-title>Log Overnight Sleep</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <p>What time did you fall asleep?</p>
+  <ion-datetime 
+    presentation="date-time" 
+    [preferWheel]="true" 
+    (ionChange)="handleChangeSleep($event)"
+    [max]="currentDate.toISOString()"
+  ></ion-datetime>
+
+  <p>What time did you wake up?</p>
+  <ion-datetime 
+    presentation="date-time" 
+    [preferWheel]="true" 
+    (ionChange)="handleChangeWake($event)"
+    [max]="currentDate.toISOString()"
+  ></ion-datetime>
+
+  <ion-button (click)="onClick()" expand="block">Log Sleep Times</ion-button>
 </ion-content>
