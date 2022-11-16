@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'day',
     loadChildren: () => import('./day/day.module').then( m => m.DayPageModule)
+  },  {
+    path: 'sleep-logs',
+    loadChildren: () => import('./sleep-logs/sleep-logs.module').then( m => m.SleepLogsPageModule)
   },
+
 ];
 
 @NgModule({

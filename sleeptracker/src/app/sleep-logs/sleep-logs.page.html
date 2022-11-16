@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sleep Logs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="clearAll()" style="--box-shadow:none;" expand="full" size="small">clear storage</ion-button>
+  <br />
+
+  <ion-list>
+    <ion-list-header *ngIf="keys.length > 0"> KEYS </ion-list-header>
+      <ion-item *ngFor="let key of keys">
+        <ion-label>
+            <b> {{key}} </b>
+        </ion-label>
+        <ion-button (click)="getValue(key)" size="small">view</ion-button>
+        <ion-button (click)="deleteStorage(key)" size="small">delete</ion-button>
+      </ion-item>
+  </ion-list>
+</ion-content>
