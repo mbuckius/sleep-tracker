@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import  {Preferences, SetOptions, GetOptions, RemoveOptions, KeysResult} from "@capacitor/preferences"
+import  { Preferences, SetOptions, GetOptions, RemoveOptions, KeysResult } from "@capacitor/preferences";
+import { SleepService } from '../services/sleep.service';
 import { IonSpinner } from '@ionic/angular';
 
 @Component({
@@ -9,38 +10,45 @@ import { IonSpinner } from '@ionic/angular';
 })
 export class SleepLogsPage implements OnInit {
   keys = [];
-  constructor() { }
 
-  ngOnInit() {
-    Preferences.clear().then(() =>{
+  constructor(private sleepService: SleepService) { }
 
-      let i = 0;
-      let ref = this;
-      function inner()
-      {
-        let key = "key"+i.toString();
-        let val = "value"+i.toString();
+  async ngOnInit() { 
+    // this.getKeys();
+    this.keys = await this.sleepService.getDates();
 
-        let options:SetOptions = {
-          key:key,
-          value:val
-        }
+    var sleepiness = await this.sleepService.getSleepinessOn(this.keys[0]);
+    console.log(sleepiness)
+    // Preferences.clear().then(() =>{
+
+    //   let i = 0;
+    //   let ref = this;
+
+    //   function inner()
+    //   {
+    //     let key = "key"+i.toString();
+    //     let val = "value"+i.toString();
+
+    //     let options:SetOptions = {
+    //       key:key,
+    //       value:val
+    //     }
         
-        Preferences.set(options).then(()=>{
-          i++;
-          if(i < 20)
-          {
-            inner();
-          }
-          else
-          {
-            ref.getKeys();
-          }
-        })
-      }
+    //     Preferences.set(options).then(()=>{
+    //       i++;
+    //       if(i < 20)
+    //       {
+    //         inner();
+    //       }
+    //       else
+    //       {
+    //         ref.getKeys();
+    //       }
+    //     })
+    //   }
       
-      inner();
-    })
+    //   inner();
+    // })
   }
 
   getValue(key){
