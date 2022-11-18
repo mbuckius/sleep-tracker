@@ -1,10 +1,10 @@
---Readme document for *author(s)*, *email(s)*, *UCI id(s)*--
+--Readme document for Mayuri Buckius and Jocelyn Eng, mbuckius@uci.edu and jeng3@uci.edu, 45271537 and 41725188--
 
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
 */20
-- */2 The ability to log overnight sleep
-- */2 The ability to log sleepiness during the day
+- 2/2 The ability to log overnight sleep
+- 2/2 The ability to log sleepiness during the day
 - */2 The ability to view these two categories of logged data
 - */4 Either using a native device resource or backing up logged data
 - */4 Following good principles of mobile design
@@ -22,9 +22,8 @@
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
 
 
-
 5. Is there anything special we need to know in order to run your code?
-
+- install capacitor/preferences
 
 
 --Aim for no more than two sentences for each of the following questions.--

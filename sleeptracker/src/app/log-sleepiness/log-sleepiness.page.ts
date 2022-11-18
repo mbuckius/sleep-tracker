@@ -9,7 +9,8 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 })
 
 export class LogSleepinessPage implements OnInit {
-  loggedValue: number;
+  loggedValue: number = 1;
+  standfordSleepinessData = StanfordSleepinessData.ScaleValues
   currentDate: Date = new Date();
   currentTime: String = this.currentDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
