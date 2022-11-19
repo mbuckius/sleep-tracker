@@ -9,6 +9,7 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
   selector: 'app-log-sleepiness',
   templateUrl: './log-sleepiness.page.html',
   styleUrls: ['./log-sleepiness.page.scss'],
+  providers: [SleepService]
 })
 
 export class LogSleepinessPage implements OnInit {
@@ -38,7 +39,6 @@ export class LogSleepinessPage implements OnInit {
     if (this.loggedValue) {
       // Create and store loggedData from user chosen value
       var loggedData = new StanfordSleepinessData(this.loggedValue);
-      console.log('logging data')
       this.sleepService.logSleepiness(loggedData);
     }
   }

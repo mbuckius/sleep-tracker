@@ -4,20 +4,22 @@ import { SleepData } from '../data/sleep-data';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import  { Preferences, SetOptions, GetOptions, RemoveOptions, KeysResult } from "@capacitor/preferences";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
+	keys = [];
 
-	constructor(public sleepService:SleepService) {
+	constructor(private sleepService: SleepService) { }
 
-	}
-
-	ngOnInit() {
+	async ngOnInit() {
 		console.log(this.allSleepData);
+		
 	}
 
 	/* Ionic doesn't allow bindings to static variables, so this getter can be used instead. */

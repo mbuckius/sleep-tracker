@@ -7,6 +7,7 @@ import { IonSpinner } from '@ionic/angular';
   selector: 'app-sleep-logs',
   templateUrl: './sleep-logs.page.html',
   styleUrls: ['./sleep-logs.page.scss'],
+  providers: [SleepService]
 })
 export class SleepLogsPage implements OnInit {
   keys = [];

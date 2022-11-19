@@ -52,6 +52,7 @@ export class SleepService {
 
 		if (this.keys.includes('dates')){
 			var curVal = await this.getValue('dates');
+			console.log(curVal);
 
 			if (!curVal.includes(loggedDate)) {
 				curVal.push(loggedDate);
@@ -64,6 +65,7 @@ export class SleepService {
 	}
 
 	async logSleepiness(sleepData:StanfordSleepinessData) {
+		console.log(sleepData);
 		var date = sleepData.getLoggedAt().toLocaleDateString();
 		var time = sleepData.getLoggedAt().toLocaleTimeString();
 		var value = sleepData.getLoggedValue();
@@ -75,17 +77,30 @@ export class SleepService {
 		if (this.keys.includes('sleepiness')){
 			var curVal = await this.getValue('sleepiness');
 
-			if (curVal.has(date)) {
+			if (date in curVal) {
+				console.log("date already added")
 				curVal[date][time] = value;
 			}
 			else {
+				console.log("no date yet");
 				curVal[date] = { time : value };
 			}
 			
 			this.setKey('sleepiness', curVal);
+			console.log(curVal);
 		}
 		else {
-			this.setKey('sleepiness', { date : { time : value }});
+			console.log("no sleepiness data yet");
+			var temp = new Map();
+			var timeTemp = new Map();
+
+			timeTemp.set(time, value);
+			temp.set(date, timeTemp);
+			console.log(temp);
+
+			this.setKey('sleepiness', temp);
+			var curVal = await this.getValue('sleepiness');
+			console.log(curVal);
 		}
 	}
 
@@ -98,12 +113,12 @@ export class SleepService {
   	}
 	
 	setKey(key, val) {
-
+		
         let options:SetOptions = {
           key:key,
           value:JSON.stringify(val)
         }
-
+		console.log(options);
 		Preferences.set(options);
 	}
 
