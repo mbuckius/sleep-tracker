@@ -23,8 +23,8 @@ export class HomePage {
 	}
 
 	/* Ionic doesn't allow bindings to static variables, so this getter can be used instead. */
-	get allSleepData() {
-		return SleepService.AllSleepData;
-	}
+	// get allSleepData() {
+	// 	return SleepService.AllSleepData;
+	// }
 
 }

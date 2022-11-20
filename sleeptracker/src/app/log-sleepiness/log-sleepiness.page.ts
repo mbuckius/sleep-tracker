@@ -37,54 +37,20 @@ export class LogSleepinessPage implements OnInit {
 
   async onClick() {
     if (this.loggedValue) {
-      // Create and store loggedData from user chosen value
       var currentTime = (new Date()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       var loggedData = new StanfordSleepinessData(this.loggedValue);
-      // this.sleepService.logSleepiness(loggedData);
-      // this.sleepService.set("New Key 5", "New Val");
+
+      // Call to service to store sleepiness data
       this.sleepService.logSleepiness(loggedData);
+
+      // Create alert to confirm successful log
       const sleepinessLoggedAlert = await this.alertController.create({
         message: `Successfuly Logged Sleepiness Level at ${currentTime}`,
         buttons: ['OK']
       });
-      // console.log("Successfully Added new key val pair");
-      // this.sleepService.getStoredKeys().then((keys)=>{
-      //   console.log(keys);
-      // })
 
+      // Display alert
       await sleepinessLoggedAlert.present();
     }
-  }
-
-  getValue(key){
-    let options:GetOptions = {
-      key:key
-    }
-    Preferences.get(options).then((val)=> {
-      alert(val.value);
-    })
-  }
-
-  deleteStorage(key) {
-    let options:RemoveOptions = {
-      key:key
-    }
-    Preferences.remove(options).then(()=>{
-      alert("deleted");
-      this.getKeys();
-    })
-  }
-
-  clearAll(){
-    Preferences.clear().then(()=> {
-      this.getKeys();
-    })
-  }
-
-  getKeys()
-  {
-    Preferences.keys().then((keys)=>{
-      this.keys = keys.keys;
-    })
   }
 }

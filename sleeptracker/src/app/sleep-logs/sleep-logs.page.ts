@@ -77,7 +77,8 @@ export class SleepLogsPage implements OnInit {
       console.log(this.keys);
     }
     else{
-
+      this.keys = await this.sleepService.getAllOvernightSleepLogs();
+      console.log(this.keys);
     }
 
   }
@@ -93,36 +94,8 @@ export class SleepLogsPage implements OnInit {
 
   }
 
-  // deleteStorage(key) {
-  //   let options:RemoveOptions = {
-  //     key:key
-  //   }
-  //   Preferences.remove(options).then(()=>{
-  //     alert("deleted");
-  //     this.getKeys();
-  //   })
-  // }
-
   async clearAll(){
-    // Preferences.clear().then(()=> {
-    //   this.getKeys();
-    // })
     await this.sleepService.clear();
-    this.getKeys();
     this.keys = await this.sleepService.getKeys();
-  }
-
-  getKeys()
-  {
-    // Preferences.keys().then((keys)=>{
-    //   this.keys = keys.keys;
-    // })
-    var v = this.sleepService.getKeys();
-    // console.log(v)
-    // this.sleepService.getStoredKeys().then((keys)=>{
-    //   this.keys = keys;
-    // })
-    // console.log(this.keys)
-    // this.keys = await this.sleepService.getStoredKeys();
   }
 }
