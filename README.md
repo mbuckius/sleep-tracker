@@ -17,13 +17,14 @@
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
     https://ionicframework.com/docs/api/datetime#overview
+    https://github.com/ionic-team/ionic-storage/blob/main/README.md
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
-
+- we only worked with each other
 
 5. Is there anything special we need to know in order to run your code?
-- install capacitor/preferences
+- install ionic storage-angular
 
 
 --Aim for no more than two sentences for each of the following questions.--
@@ -58,7 +59,7 @@
 
 
 13. If you backed up logged data, where does it back up to?
-
+    Using the Ionic Storage Plugin
 
 14. How does your app implement or follow principles of good mobile design?
 

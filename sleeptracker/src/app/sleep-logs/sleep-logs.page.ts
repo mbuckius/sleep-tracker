@@ -11,15 +11,29 @@ import { IonSpinner } from '@ionic/angular';
 })
 export class SleepLogsPage implements OnInit {
   keys = [];
+  // sleepinessLogs = {};
+  // overnightSleepLogs = {};
+  currLogView = null;
 
   constructor(private sleepService: SleepService) { }
 
   async ngOnInit() { 
+    // await this.sleepService.set('hello', 'world');
+    // console.log("Set key val");
+    // this.keys = await this.sleepService.getKeys();
+    // console.log(this.keys)
+    // console.log(this.keys);
+    // Promise.all([this.sleepService.getStoredKeys()]).then(([keys])=> {
+    //   this.keys = keys;
+    // }).catch(error => {
+    //   console.log("StorageError")
+    // })
+    // console.log(this.sleepService.getStoredKeys());
     // this.getKeys();
-    this.keys = await this.sleepService.getDates();
-
-    var sleepiness = await this.sleepService.getSleepinessOn(this.keys[0]);
-    console.log(sleepiness)
+    // this.keys = await this.sleepService.getDates();
+    // this.keys = this.sleepService.getStoredKeys();
+    // var sleepiness = await this.sleepService.getSleepinessOn(this.keys[0]);
+    // console.log(sleepiness)
     // Preferences.clear().then(() =>{
 
     //   let i = 0;
@@ -52,35 +66,63 @@ export class SleepLogsPage implements OnInit {
     // })
   }
 
+  async handleChange(e) {
+    var viewSelection = e.detail.value;
+    this.currLogView = viewSelection;
+    if (viewSelection == 'sleepiness-logs') {
+      // await this.sleepService.set('world', 'help');
+      // console.log("Set key val");
+      // this.keys = await this.sleepService.getKeys(); // change to get sleepiness
+      this.keys = await this.sleepService.getAllSleepinessLogs();
+      console.log(this.keys);
+    }
+    else{
+
+    }
+
+  }
+
+
   getValue(key){
-    let options:GetOptions = {
-      key:key
-    }
-    Preferences.get(options).then((val)=> {
-      alert(val.value);
-    })
+    // let options:GetOptions = {
+    //   key:key
+    // }
+    // Preferences.get(options).then((val)=> {
+    //   alert(val.value);
+    // })
+
   }
 
-  deleteStorage(key) {
-    let options:RemoveOptions = {
-      key:key
-    }
-    Preferences.remove(options).then(()=>{
-      alert("deleted");
-      this.getKeys();
-    })
-  }
+  // deleteStorage(key) {
+  //   let options:RemoveOptions = {
+  //     key:key
+  //   }
+  //   Preferences.remove(options).then(()=>{
+  //     alert("deleted");
+  //     this.getKeys();
+  //   })
+  // }
 
-  clearAll(){
-    Preferences.clear().then(()=> {
-      this.getKeys();
-    })
+  async clearAll(){
+    // Preferences.clear().then(()=> {
+    //   this.getKeys();
+    // })
+    await this.sleepService.clear();
+    this.getKeys();
+    this.keys = await this.sleepService.getKeys();
   }
 
   getKeys()
   {
-    Preferences.keys().then((keys)=>{
-      this.keys = keys.keys;
-    })
+    // Preferences.keys().then((keys)=>{
+    //   this.keys = keys.keys;
+    // })
+    var v = this.sleepService.getKeys();
+    // console.log(v)
+    // this.sleepService.getStoredKeys().then((keys)=>{
+    //   this.keys = keys;
+    // })
+    // console.log(this.keys)
+    // this.keys = await this.sleepService.getStoredKeys();
   }
 }

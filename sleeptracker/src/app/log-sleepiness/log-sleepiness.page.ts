@@ -2,7 +2,7 @@ import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import  {Preferences, SetOptions, GetOptions, RemoveOptions, KeysResult} from "@capacitor/preferences";
 import { SleepService } from '../services/sleep.service';
-
+import { AlertController } from '@ionic/angular';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 
 @Component({
@@ -24,7 +24,7 @@ export class LogSleepinessPage implements OnInit {
   //   this.currentTime = this.currentDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
   // }
 
-  constructor(private sleepService: SleepService) { 
+  constructor(private sleepService: SleepService, public alertController:AlertController) { 
     // setInterval(this.refreshTime, 1000);
   }
 
@@ -35,11 +35,24 @@ export class LogSleepinessPage implements OnInit {
     this.loggedValue = e.detail.value;
   }
 
-  onClick() {
+  async onClick() {
     if (this.loggedValue) {
       // Create and store loggedData from user chosen value
+      var currentTime = (new Date()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
       var loggedData = new StanfordSleepinessData(this.loggedValue);
+      // this.sleepService.logSleepiness(loggedData);
+      // this.sleepService.set("New Key 5", "New Val");
       this.sleepService.logSleepiness(loggedData);
+      const sleepinessLoggedAlert = await this.alertController.create({
+        message: `Successfuly Logged Sleepiness Level at ${currentTime}`,
+        buttons: ['OK']
+      });
+      // console.log("Successfully Added new key val pair");
+      // this.sleepService.getStoredKeys().then((keys)=>{
+      //   console.log(keys);
+      // })
+
+      await sleepinessLoggedAlert.present();
     }
   }
 

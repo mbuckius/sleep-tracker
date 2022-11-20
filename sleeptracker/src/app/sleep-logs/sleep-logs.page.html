@@ -4,15 +4,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-button (click)="clearAll()" style="--box-shadow:none;" expand="full" size="small">clear storage</ion-button>
   <br />
-
   <ion-list>
-    <ion-list-header *ngIf="keys"> KEYS </ion-list-header>
+    <ion-item>
+      <ion-select interface="popover" placeholder="Select Log View" (ionChange)="handleChange($event)">
+        <ion-select-option value="sleepiness-logs">Sleepiness Logs</ion-select-option>
+        <ion-select-option value="overnight-sleep-logs">Overnight Sleep Logs</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <!-- <ion-list-header *ngIf="currLogView"> {{currLogView}} </ion-list-header> -->
+      <h3 *ngIf="currLogView && keys.length === 0" style="text-align:center"> No logs for {{currLogView}} yet!</h3>
       <ion-item *ngFor="let key of keys">
         <ion-label>
-            <b> {{key}} </b>
+            <b> {{key.date}} </b>
         </ion-label>
         <ion-button (click)="getValue(key)" size="small">view</ion-button>
         <ion-button (click)="deleteStorage(key)" size="small">delete</ion-button>

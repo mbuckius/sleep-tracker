@@ -18,7 +18,7 @@ export class HomePage {
 	constructor(private sleepService: SleepService) { }
 
 	async ngOnInit() {
-		console.log(this.allSleepData);
+		// console.log(this.allSleepData);
 		
 	}
 
