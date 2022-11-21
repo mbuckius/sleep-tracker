@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import  { Preferences, SetOptions, GetOptions, RemoveOptions, KeysResult } from "@capacitor/preferences";
 import { SleepService } from '../services/sleep.service';
 import { IonSpinner } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+
 
 @Component({
   selector: 'app-sleep-logs',
@@ -10,61 +14,21 @@ import { IonSpinner } from '@ionic/angular';
   providers: [SleepService]
 })
 export class SleepLogsPage implements OnInit {
+  isModalOpen = false;
+  today = new Date();
+  info;
+
+  
+
+ 
   keys = [];
   // sleepinessLogs = {};
   // overnightSleepLogs = {};
   currLogView = null;
 
-  constructor(private sleepService: SleepService) { }
+  constructor(private sleepService: SleepService, private alertController: AlertController) { }
 
-  async ngOnInit() { 
-    // await this.sleepService.set('hello', 'world');
-    // console.log("Set key val");
-    // this.keys = await this.sleepService.getKeys();
-    // console.log(this.keys)
-    // console.log(this.keys);
-    // Promise.all([this.sleepService.getStoredKeys()]).then(([keys])=> {
-    //   this.keys = keys;
-    // }).catch(error => {
-    //   console.log("StorageError")
-    // })
-    // console.log(this.sleepService.getStoredKeys());
-    // this.getKeys();
-    // this.keys = await this.sleepService.getDates();
-    // this.keys = this.sleepService.getStoredKeys();
-    // var sleepiness = await this.sleepService.getSleepinessOn(this.keys[0]);
-    // console.log(sleepiness)
-    // Preferences.clear().then(() =>{
-
-    //   let i = 0;
-    //   let ref = this;
-
-    //   function inner()
-    //   {
-    //     let key = "key"+i.toString();
-    //     let val = "value"+i.toString();
-
-    //     let options:SetOptions = {
-    //       key:key,
-    //       value:val
-    //     }
-        
-    //     Preferences.set(options).then(()=>{
-    //       i++;
-    //       if(i < 20)
-    //       {
-    //         inner();
-    //       }
-    //       else
-    //       {
-    //         ref.getKeys();
-    //       }
-    //     })
-    //   }
-      
-    //   inner();
-    // })
-  }
+  async ngOnInit() {}
 
   async handleChange(e) {
     var viewSelection = e.detail.value;
@@ -83,15 +47,47 @@ export class SleepLogsPage implements OnInit {
 
   }
 
+  async getValue(key){
+    var message = "hi \n" + key.date;
 
-  getValue(key){
-    // let options:GetOptions = {
-    //   key:key
-    // }
-    // Preferences.get(options).then((val)=> {
-    //   alert(val.value);
-    // })
+    if (this.currLogView == 'sleepiness-logs') {
+      // Create alert to confirm succcessful storage
+      const SleepinessAlert = await this.alertController.create({
+        message: `${message}`,
+        buttons: ['OK']
+      });
 
+      // Display alert
+      await SleepinessAlert.present();
+      
+
+    }
+    else {
+      // Calculate the difference in milliseconds
+      var difference_ms = key.loggedSleepData.sleepEnd - key.loggedSleepData.sleepStart;
+              
+      // Convert to hours and minutes
+      let message =  `On ${key.date}, you slept for ` + (Math.floor(difference_ms / (1000*60*60))).toString() + " hours, " + (Math.floor(difference_ms / (1000*60) % 60)).toString() + " minutes";	
+
+      const overnightSleepAlert = await this.alertController.create({
+        message: `${message}`,
+        buttons: ['OK']
+      });
+
+      // Display alert
+      await overnightSleepAlert.present();
+    }
+
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  showView(key) {
+    this.info = key;
+    this.setOpen(true);
+    console.log(key);
   }
 
   async clearAll(){

@@ -22,8 +22,24 @@
         <ion-label>
             <b> {{key.date}} </b>
         </ion-label>
-        <ion-button (click)="getValue(key)" size="small">view</ion-button>
-        <ion-button (click)="deleteStorage(key)" size="small">delete</ion-button>
+        <ion-button expand="block" (click)="showView(key)">View</ion-button>
+        <!-- <ion-button (click)="deleteStorage(key)" size="small">delete</ion-button> -->
       </ion-item>
   </ion-list>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      
+          
+            <ion-button fill="clear" class="close-button" (click)="setOpen(false)">&#10005;</ion-button>
+         
+       
+      <h1 class="title">Logs for {{ info.date }}</h1>
+      <ion-content class="ion-padding">
+        <p>
+          
+        </p>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
