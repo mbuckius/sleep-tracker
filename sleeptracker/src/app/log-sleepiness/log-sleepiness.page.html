@@ -1,26 +1,31 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Log Your Sleepiness</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
-  <!-- <p>Logging at {{ currentTime }}</p> -->
-  <!-- <ion-list>
-    <ion-item>
-      <ion-select interface="popover" placeholder="Select sleepiness level" (ionChange)="handleChange($event)">
-        <ion-select-option value="1">1</ion-select-option>
-        <ion-select-option value="2">2</ion-select-option>
-        <ion-select-option value="3">3</ion-select-option>
-        <ion-select-option value="4">4</ion-select-option>
-        <ion-select-option value="5">5</ion-select-option>
-        <ion-select-option value="6">6</ion-select-option>
-        <ion-select-option value="7">7</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list> -->
-  <p style="padding:8px; text-align: center;">On a scale from 1-7, how sleepy are you right now?</p>
-  <ion-range [ticks]="true" [pin]="true" [snaps]="true" [min]="1" [max]="7" (ionChange)="handleChange($event)"></ion-range>
-  <p style="padding:8px; background-color: rgb(105, 161, 221); border-radius: 15px;">{{loggedValue}}: {{standfordSleepinessData[loggedValue]}}</p>
-  <ion-button color="secondary" style="position: absolute; bottom:100px; width:98%; "(click)="onClick()" expand="block">Log Sleepiness</ion-button>
+
+  <h1 class="title">Log Your Sleepiness</h1>
+  <p class="question" style="padding:8px; text-align: center;">On a scale from 1-7, how sleepy are you right now?</p>
+  
+  <ion-range 
+    [ticks]="true" 
+    [pin]="true" 
+    [snaps]="true" 
+    [min]="1" 
+    [max]="7" 
+    (ionChange)="handleChange($event)"
+  ></ion-range>
+
+  <div class="sleepiness-info-container">
+    <p class="sleepiness-info">{{standfordSleepinessData[loggedValue]}}</p>
+  </div>
+
+  <ion-button 
+    class="log-sleepiness-button" 
+    color="secondary" 
+    (click)="onClick()" 
+    expand="block"
+  >Log Sleepiness</ion-button>
 </ion-content>
